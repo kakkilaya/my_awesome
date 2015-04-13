@@ -12,6 +12,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 vicious = require("vicious")
 require("batinit")
+require("volume")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -159,17 +160,26 @@ logoutbutton:buttons(awful.util.table.join(
 		  awful.util.spawn("/home/akshay/mybash/logout.sh") end)
 ))
 
+volumelvl = wibox.widget.textbox()
+set_volume(volumelvl)
+
 volumebutton = wibox.widget.textbox()
-volumebutton:set_text("🔊")
+volumebutton:set_text("🔊 ")
 volumebutton:buttons(awful.util.table.join(
 	 awful.button({ }, 1, function()
-		  awful.util.spawn("/home/akshay/mybash/sound.sh") end),
+		  awful.util.spawn("/home/akshay/mybash/sound.sh")
+	  	  set_volume(volumelvl)
+	 end),
 	 awful.button({ }, 3, function()
 		  awful.util.spawn("amixer set Master toggle > /dev/null 2>&1") end),
 	 awful.button({ }, 4, function()
-		  awful.util.spawn("amixer set Master 5%+ > /dev/null 2>&1") end),
+		  awful.util.spawn("amixer set Master 5%+ > /dev/null 2>&1")
+		  set_volume(volumelvl)
+	 end),
 	 awful.button({ }, 5, function()
-		  awful.util.spawn("amixer set Master 5%- > /dev/null 2>&1") end)
+		  awful.util.spawn("amixer set Master 5%- > /dev/null 2>&1")
+		  set_volume(volumelvl)
+	 end)
 ))
 
 -- Create a wibox for each screen and add it
@@ -256,6 +266,7 @@ for s = 1, screen.count() do
     right_layout:add(batwidget)
     right_layout:add(separator)
 	 right_layout:add(volumebutton)
+	 right_layout:add(volumelvl)
 	 right_layout:add(separator)
 	 right_layout:add(logoutbutton)
 	 right_layout:add(separator)
@@ -345,9 +356,13 @@ globalkeys = awful.util.table.join(
 -- key bindings for volume control
 globalkeys = awful.util.table.join(globalkeys,
 	 awful.key({ }, "XF86AudioRaiseVolume", function()
-		  awful.util.spawn("amixer set Master 5%+ > /dev/null 2>&1") end),
+		  awful.util.spawn("amixer set Master 5%+ > /dev/null 2>&1")
+		  set_volume(volumelvl)
+	 end),
 	 awful.key({ }, "XF86AudioLowerVolume", function()
-		  awful.util.spawn("amixer set Master 5%- > /dev/null 2>&1") end),
+		  awful.util.spawn("amixer set Master 5%- > /dev/null 2>&1")
+	  	  set_volume(volumelvl)
+	 end),
 	 awful.key({ }, "XF86AudioMute", function()
 		  awful.util.spawn("amixer set Master toggle > /dev/null 2>&1") end)
 )
