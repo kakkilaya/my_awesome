@@ -164,13 +164,13 @@ volumelvl = wibox.widget.textbox()
 set_volume(volumelvl)
 
 volumebutton = wibox.widget.textbox()
-volumebutton:set_text("🔊 ")
+volume_toggle(volumebutton)
 volumebutton:buttons(awful.util.table.join(
 	 awful.button({ }, 1, function()
 		  awful.util.spawn("/home/akshay/mybash/sound.sh > /dev/null 2>&1")
 	 end),
 	 awful.button({ }, 3, function()
-		  awful.util.spawn("amixer set Master toggle > /dev/null 2>&1") end),
+		  awful.util.spawn("/home/akshay/mybash/volume_toggle.sh > /dev/null 2>&1") end),
 	 awful.button({ }, 4, function()
 		  awful.util.spawn("/home/akshay/mybash/volume_set.sh 5%+ > /dev/null 2>&1")
 	 end),
@@ -359,7 +359,7 @@ globalkeys = awful.util.table.join(globalkeys,
 		  awful.util.spawn("/home/akshay/mybash/volume_set.sh 5%- > /dev/null 2>&1")
 	 end),
 	 awful.key({ }, "XF86AudioMute", function()
-		  awful.util.spawn("amixer set Master toggle > /dev/null 2>&1") end)
+		  awful.util.spawn("/home/akshay/mybash/volume_toggle.sh > /dev/null 2>&1") end)
 )
 
 -- Take screenshot with PrntScr key
