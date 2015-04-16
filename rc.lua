@@ -154,7 +154,7 @@ separator = wibox.widget.textbox()
 separator:set_text("     ");
 
 logoutbutton = wibox.widget.textbox()
-logoutbutton:set_text("Logout")
+logoutbutton:set_text("🚪")
 logoutbutton:buttons(awful.util.table.join(
 	 awful.button({ }, 1, function() 
 		  awful.util.spawn("/home/akshay/mybash/logout.sh") end)
