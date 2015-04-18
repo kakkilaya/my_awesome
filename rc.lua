@@ -1,6 +1,6 @@
 -- Standard awesome library
 local gears = require("gears")
-local awful = require("awful")
+awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and layout library
@@ -8,11 +8,13 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
-local naughty = require("naughty")
+naughty = require("naughty")
 local menubar = require("menubar")
 vicious = require("vicious")
 require("batinit")
 require("volume")
+require("calendar")
+require("batnotif")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -136,8 +138,23 @@ mytextclock = awful.widget.textclock()
 
 -- akshay's additions
 
+mytextclock:connect_signal("mouse::enter", function()
+	add_calendar(0)
+end)
+mytextclock:connect_signal("mouse::leave", remove_calendar)
+mytextclock:buttons(awful.util.table.join(
+	awful.button({ }, 4, function()
+		add_calendar(-1)
+	end),
+	awful.button({ }, 5, function()
+		add_calendar(1)
+	end)
+))
+
 batwidget = wibox.widget.textbox()
 bat_init(batwidget)
+batwidget:connect_signal("mouse::enter", add_batntf)
+batwidget:connect_signal("mouse::leave", remove_batntf)
 --awful.util.spawn("/home/akshay/mybash/bat_init.sh")
 --vicious.register(batwidget, vicious.widgets.bat, "$2%", 60, "BAT0")
 
