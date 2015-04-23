@@ -15,6 +15,7 @@ require("batinit")
 require("volume")
 require("calendar")
 require("batnotif")
+config_dir = awful.util.getdir("config")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -43,7 +44,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(awful.util.getdir("config") .. "/themes/default/theme.lua")
+beautiful.init(config_dir .. "/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"
@@ -136,7 +137,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
 
--- akshay's additions
+-- custom additions
 
 mytextclock:connect_signal("mouse::enter", function()
 	add_calendar(0)
@@ -174,7 +175,8 @@ logoutbutton = wibox.widget.textbox()
 logoutbutton:set_text("🚪")
 logoutbutton:buttons(awful.util.table.join(
 	 awful.button({ }, 1, function() 
-		  awful.util.spawn("/home/akshay/mybash/logout.sh") end)
+		  awful.util.spawn(config_dir .. "/scripts/logout.sh")
+	 end)
 ))
 
 volumelvl = wibox.widget.textbox()
@@ -184,16 +186,13 @@ volumebutton = wibox.widget.textbox()
 volume_toggle(volumebutton)
 volumebutton:buttons(awful.util.table.join(
 	 awful.button({ }, 1, function()
-		  awful.util.spawn("/home/akshay/mybash/sound.sh > /dev/null 2>&1")
-	 end),
+		  awful.util.spawn(config_dir .. "/scripts/sound.sh > /dev/null 2>&1") end),
 	 awful.button({ }, 3, function()
-		  awful.util.spawn("/home/akshay/mybash/volume_toggle.sh > /dev/null 2>&1") end),
+		  awful.util.spawn(config_dir .. "/scripts/volume_toggle.sh > /dev/null 2>&1") end),
 	 awful.button({ }, 4, function()
-		  awful.util.spawn("/home/akshay/mybash/volume_set.sh 5%+ > /dev/null 2>&1")
-	 end),
+		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%+ > /dev/null 2>&1") end),
 	 awful.button({ }, 5, function()
-		  awful.util.spawn("/home/akshay/mybash/volume_set.sh 5%- > /dev/null 2>&1")
-	 end)
+		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%- > /dev/null 2>&1") end)
 ))
 
 -- Create a wibox for each screen and add it
@@ -370,13 +369,13 @@ globalkeys = awful.util.table.join(
 -- key bindings for volume control
 globalkeys = awful.util.table.join(globalkeys,
 	 awful.key({ }, "XF86AudioRaiseVolume", function()
-		  awful.util.spawn("/home/akshay/mybash/volume_set.sh 5%+ > /dev/null 2>&1")
+		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%+ > /dev/null 2>&1")
 	 end),
 	 awful.key({ }, "XF86AudioLowerVolume", function()
-		  awful.util.spawn("/home/akshay/mybash/volume_set.sh 5%- > /dev/null 2>&1")
+		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%- > /dev/null 2>&1")
 	 end),
 	 awful.key({ }, "XF86AudioMute", function()
-		  awful.util.spawn("/home/akshay/mybash/volume_toggle.sh > /dev/null 2>&1") end)
+		  awful.util.spawn(config_dir .. "/scripts/volume_toggle.sh > /dev/null 2>&1") end)
 )
 
 -- Take screenshot with PrntScr key
@@ -389,12 +388,12 @@ globalkeys = awful.util.table.join(globalkeys,
 globalkeys = awful.util.table.join(globalkeys,
 	 awful.key({ "Control" }, ";", function ()
 		  for s = 1, screen.count() do
-			  gears.wallpaper.maximized("/home/akshay/wallpapers/h_wall.png", s, true)
+			  gears.wallpaper.maximized(config_dir .. "/wallpapers/h_wall.png", s, true)
 		  end
 	 end),
 	 awful.key({ "Control" }, "'", function ()
 		  for s = 1, screen.count() do
-			  gears.wallpaper.maximized("/home/akshay/wallpapers/Archlinux.jpg", s, true)
+			  gears.wallpaper.maximized(config_dir .. "/wallpapers/Archlinux.jpg", s, true)
 		  end
 	 end)
 )
