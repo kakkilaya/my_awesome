@@ -186,13 +186,13 @@ volumebutton = wibox.widget.textbox()
 volume_toggle(volumebutton)
 volumebutton:buttons(awful.util.table.join(
 	 awful.button({ }, 1, function()
-		  awful.util.spawn(config_dir .. "/scripts/sound.sh > /dev/null 2>&1") end),
+		  awful.util.spawn(config_dir .. "/scripts/sound.sh > /dev/null 2>&1", false) end),
 	 awful.button({ }, 3, function()
-		  awful.util.spawn(config_dir .. "/scripts/volume_toggle.sh > /dev/null 2>&1") end),
+		  awful.util.spawn(config_dir .. "/scripts/volume_toggle.sh > /dev/null 2>&1", false) end),
 	 awful.button({ }, 4, function()
-		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%+ > /dev/null 2>&1") end),
+		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%+ > /dev/null 2>&1", false) end),
 	 awful.button({ }, 5, function()
-		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%- > /dev/null 2>&1") end)
+		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%- > /dev/null 2>&1", false) end)
 ))
 
 -- Create a wibox for each screen and add it
@@ -369,19 +369,19 @@ globalkeys = awful.util.table.join(
 -- key bindings for volume control
 globalkeys = awful.util.table.join(globalkeys,
 	 awful.key({ }, "XF86AudioRaiseVolume", function()
-		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%+ > /dev/null 2>&1")
+		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%+ > /dev/null 2>&1", false)
 	 end),
 	 awful.key({ }, "XF86AudioLowerVolume", function()
-		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%- > /dev/null 2>&1")
+		  awful.util.spawn(config_dir .. "/scripts/volume_set.sh 5%- > /dev/null 2>&1", false)
 	 end),
 	 awful.key({ }, "XF86AudioMute", function()
-		  awful.util.spawn(config_dir .. "/scripts/volume_toggle.sh > /dev/null 2>&1") end)
+		  awful.util.spawn(config_dir .. "/scripts/volume_toggle.sh > /dev/null 2>&1", false) end)
 )
 
 -- Take screenshot with PrntScr key
 globalkeys = awful.util.table.join(globalkeys,
 	 awful.key({ }, "Print", function ()
-		  awful.util.spawn("scrot -e 'mv $f ~/screenshots/ 2>/dev/null'") end)
+		  awful.util.spawn("scrot -e 'mv $f ~/screenshots/ 2>/dev/null'", false) end)
 )
 
 -- Toggle wallpaper
@@ -393,7 +393,7 @@ globalkeys = awful.util.table.join(globalkeys,
 	 end),
 	 awful.key({ "Control" }, "'", function ()
 		  for s = 1, screen.count() do
-			  gears.wallpaper.maximized(config_dir .. "/wallpapers/Archlinux.jpg", s, true)
+			  gears.wallpaper.maximized(config_dir .. "/wallpapers/mountains-on-mars.png", s, true)
 		  end
 	 end)
 )
