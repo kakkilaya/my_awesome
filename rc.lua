@@ -102,6 +102,7 @@ end
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
+	{ "edit theme", editor_cmd .. " " .. config_dir .. "/themes/default/theme.lua" },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
@@ -116,7 +117,7 @@ mymediamenu = {
    { "vlc", "vlc" },
    { "cmus", terminal .. " -e cmus" }
 }
-mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesome_icon },
+mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu },
 				    { "Web", mybrowsersmenu },
 				    { "Media", mymediamenu },
 					 { "Dev-Tools", mydevmenu },
@@ -169,7 +170,7 @@ timeicon = wibox.widget.textbox()
 timeicon:set_text("🕐")
 
 separator = wibox.widget.textbox()
-separator:set_text("     ");
+separator:set_text("   ");
 
 logoutbutton = wibox.widget.textbox()
 logoutbutton:set_text("🚪")
@@ -263,7 +264,7 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", height = 20, screen = s })
+    mywibox[s] = awful.wibox({ position = "top", height = 25, screen = s })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -484,7 +485,8 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      maximized_vertical = false,
-                     maximized_horizontal = false } },
+                     maximized_horizontal = false,
+							size_hints_honor = false } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
