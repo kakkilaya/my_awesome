@@ -4,6 +4,11 @@ From [Wikipedia](http://en.wikipedia.org/wiki/Awesome_(window_manager)):
 >Awesome is a dynamic window manager for the X Window System developed in the C and Lua programming languages.
 >Lua is also used for configuring and extending the window manager.
 
-Awesome is named after the same phrase used by the [How I Met Your Mother](http://en.wikipedia.org/wiki/How_I_Met_Your_Mother) character [Barney Stinson](http://en.wikipedia.org/wiki/Barney_Stinson#Catchphrases).
+Some of the features that are incorporated in this configuration are 
+- logout option
+- battery widget
+- volume controller 
+- etc
 
-More about the Awesome Window Manager in the [official website](http://awesome.naquadah.org/).
+I made it it too simple without any fancy additions as i was just exploring wht it could od and also introducing myself to Lua as programming language. 
+
