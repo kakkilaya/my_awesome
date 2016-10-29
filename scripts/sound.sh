@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#add a volume widget and mention its controller files 
 volume=$(amixer sget Master \
 	| grep -Eo '[[:digit:]]{1,3}%' \
 	| head -n 1 \
