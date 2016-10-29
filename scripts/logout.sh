@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#creates a list of power option 
 ACTION=$(zenity --width=90 \
 	--height=200 \
 	--list --radiolist \
